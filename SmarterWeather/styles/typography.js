@@ -1,15 +1,24 @@
-var React = require('react-native');
-var { StyleSheet } = React;
+'use strict';
 
-var baseFontSize = 18;
+var React = require('react-native');
+var {
+  StyleSheet
+} = React;
+
+var baseFontSize = 16;
 
 var styles = StyleSheet.create({
   bigText: {
-    fontSize: baseFontSize + 8,
+    flex: 2,
+    fontSize: baseFontSize + 4,
+    textAlign: 'center',
+    margin: 10,
     color: '#FFFFFF'
   },
   mainText: {
+    flex: 1,
     fontSize: baseFontSize,
+    textAlign: 'center',
     color: '#FFFFFF'
   }
 });

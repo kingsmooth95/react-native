@@ -1,11 +1,13 @@
+'use strict';
+
 var React = require('react-native');
 var {
+  StyleSheet,
   Image,
+  CameraRoll,
   ImagePickerIOS
 } = React;
 var styles = require('./style.js');
-
-var Button = require('./../Button');
 
 var PhotoBackdrop = React.createClass({
   getInitialState() {
@@ -13,8 +15,18 @@ var PhotoBackdrop = React.createClass({
       photoSource: require('image!flowers')
     }
   },
-  _pickImage() {
-    ImagePickerIOS.openCameraDialog(
+  componentDidMount() {
+    // CameraRoll.getPhotos(
+    //   {first: 8},
+    //   (data) => {
+    //     this.setState({
+    //       photoSource: {uri: data.edges[7].node.image.uri}
+    //     })},
+    //   (error) => {
+    //     console.warn(error);
+    //   });
+
+    ImagePickerIOS.openSelectDialog(
       {},
       (data) => {
         this.setState({
@@ -32,10 +44,6 @@ var PhotoBackdrop = React.createClass({
         source={ this.state.photoSource }
         resizeMode='cover'>
         {this.props.children}
-        <Button
-          style={styles.button}
-          label="Load Image"
-          onPress={this._pickImage}/>
       </Image>
       );
   }

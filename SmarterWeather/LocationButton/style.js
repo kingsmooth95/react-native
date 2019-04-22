@@ -1,5 +1,9 @@
+'use strict';
+
 var React = require('react-native');
-var { StyleSheet } = React;
+var {
+  StyleSheet
+} = React;
 
 var baseFontSize = 16;
 
@@ -11,5 +15,6 @@ var styles = StyleSheet.create({
     borderRadius: 5
   },
 });
+
 
 module.exports = styles;

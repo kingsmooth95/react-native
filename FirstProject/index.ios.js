@@ -24,7 +24,7 @@ var FirstProject = React.createClass({
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Cmd+Control+Z for dev menu
         </Text>
       </View>
     );

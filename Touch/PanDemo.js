@@ -16,12 +16,16 @@ var CIRCLE_HIGHLIGHT_COLOR = 'green';
 
 var PanResponderExample = React.createClass({
 
-  // Set some initial values.
+  statics: {
+    title: 'PanResponder Sample',
+    description: 'Basic gesture handling example',
+  },
+
   _panResponder: {},
   _previousLeft: 0,
   _previousTop: 0,
   _circleStyles: {},
-  circle: null,
+  circle: (null : ?{ setNativeProps(props: Object): void }),
 
   getInitialState: function() {
     return {
@@ -49,10 +53,8 @@ var PanResponderExample = React.createClass({
     this._previousLeft = 20;
     this._previousTop = 84;
     this._circleStyles = {
-      style: {
-        left: this._previousLeft,
-        top: this._previousTop,
-      }
+      left: this._previousLeft,
+      top: this._previousTop,
     };
   },
 
@@ -62,43 +64,33 @@ var PanResponderExample = React.createClass({
 
   render: function() {
     return (
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        {...this._panResponder.panHandlers}>
         <View
           ref={(circle) => {
             this.circle = circle;
           }}
           style={styles.circle}
-          {...this._panResponder.panHandlers}/>
-        <Text>
-          {this.state.numberActiveTouches} touches,
-          dx: {this.state.dx},
-          dy: {this.state.dy},
-          vx: {this.state.vx},
-          vy: {this.state.vy}
-        </Text>
+        />
+        <Text>{this.state.numberActiveTouches} touches, dx: {this.state.dx},
+        dy: {this.state.dy}, vx: {this.state.vx}, vy: {this.state.vy}</Text>
       </View>
     );
   },
 
-  // _highlight and _unHighlight get called by PanResponder methods,
-  // providing visual feedback to the user.
   _highlight: function() {
     this.circle && this.circle.setNativeProps({
-      style: {
-        backgroundColor: CIRCLE_HIGHLIGHT_COLOR 
-      }
+      backgroundColor: CIRCLE_HIGHLIGHT_COLOR
     });
   },
 
   _unHighlight: function() {
     this.circle && this.circle.setNativeProps({
-      style: {
-        backgroundColor: CIRCLE_COLOR
-      }
+      backgroundColor: CIRCLE_COLOR
     });
   },
 
-  // We're controlling the circle's position directly with setNativeProps.
   _updatePosition: function() {
     this.circle && this.circle.setNativeProps(this._circleStyles);
   },
@@ -131,9 +123,8 @@ var PanResponderExample = React.createClass({
       numberActiveTouches: gestureState.numberActiveTouches
     });
 
-    // Calculate current position using deltas
-    this._circleStyles.style.left = this._previousLeft + gestureState.dx;
-    this._circleStyles.style.top = this._previousTop + gestureState.dy;
+    this._circleStyles.left = this._previousLeft + gestureState.dx;
+    this._circleStyles.top = this._previousTop + gestureState.dy;
     this._updatePosition();
   },
   _handlePanResponderEnd: function(e: Object, gestureState: Object) {
