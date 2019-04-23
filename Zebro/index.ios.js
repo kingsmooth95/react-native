@@ -62,7 +62,7 @@ var Zebro = React.createClass({
         nextCard={this.createdDeck}
         {...route.data}/>;
     case 'review':
-      return <Review {...route.data} />;
+      return <Review quit={this.goHome} {...route.data} />;
     default:
       console.error('Encountered unexpected route: ' + route.name);
     }
@@ -85,7 +85,6 @@ var Zebro = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
     marginTop: 30
   }
 });
